@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs')%>
+  <body>
+    <%- include('./partials/nav.ejs')%>
+
+    <div class="blog_content">
+      <h1>All Blogs</h1>
+      <div class="container">
+        <ul class="list-group blog_container">
+          <% if(blogs.length>0) { %> <% blogs.forEach((blog,i) => { %>
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-start
+            "
+          >
+          <a href="/blogs/<%= blog._id %>">
+            <div class="ms-2 me-auto subHeading">
+              <div class="fw-bold mainHeading"><%= ` ${blog.title}` %></div>
+              <%= blog.snippet %>
+            </div>
+          </a>
+          </li>
+          <% }) %> <% }else{ %>
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-start
+            "
+          >
+            <div class="ms-2 me-auto subHeading">
+              <div class="fw-bold mainHeading">
+                There Are No Blogs to Display
+              </div>
+            </div>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+    </div>
+
+    <%- include('./partials/footer.ejs')%>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs')%>
+
+  <body>
+      <%- include('./partials/nav.ejs')%>
+
+      <div class="blog_detail container">
+        <h1>Blog Detail</h1>
+
+        <!-- <div class="card text-end bg-dark detailCard" width="18rem">
+          <div class="card-body">
+            <h5 class="card-title text-start text-light"><%= blog.title %></h5>
+            <p class="card-text text-start text-info"><%= blog.body%></p>
+            <a
+              href="#"
+              class="btn btn-outline-danger delete"
+              data-doc="<%= blog._id%>"
+              >Delete</a
+            >
+          </div>
+        </div> -->
+        <div class="card text-end bg-dark">
+          <div class="card-body">
+            <h5 class="card-title text-start text-light"><%= blog.title %></h5>
+            <p class="card-text text-start text-info"><%= blog.body%></p>
+            <a
+              href="#"
+              class="btn btn-outline-danger delete"
+              data-doc="<%= blog._id%>"
+              >Delete</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <%- include('./partials/footer.ejs')%>
+    <script>
+      const trashcan = document.querySelector("a.delete");
+      trashcan.addEventListener("click", (e) => {
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+        fetch(endpoint, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>
